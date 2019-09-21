@@ -1,0 +1,8 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <form method="POST" action="login">
+    <input type="password" name="password" value="{{
+      request.form.password }}">
+  </form>
+{% endblock %}
