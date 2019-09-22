@@ -38,3 +38,7 @@ def get_project_by_id(project_id):
   project = models.Project.query.get(project_id)
   return jsonify(project)
 
+@app.route('/techs')
+def get_all_techs():
+  techs = models.Tech.query.all()
+  return jsonify(techs)

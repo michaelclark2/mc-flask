@@ -13,12 +13,14 @@ class Tech(db.Model):
   id: int
   name: str
   icon: str
+  in_prod: bool
 
   # SQLAlchemy definitions
   __tablename__ = 'techs'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), index=True, unique=True)
   icon = db.Column(db.String(500), index=True, unique=True)
+  in_prod = db.Column(db.Boolean)
 
   def __repr__(self):
     return '<Tech {}>'.format(self.name)
