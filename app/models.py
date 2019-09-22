@@ -1,6 +1,7 @@
 from app import db
 from dataclasses import dataclass
 
+"""An associaction table for project techs"""
 association_table = db.Table('project_techs', db.metadata,
   db.Column('project_id', db.Integer, db.ForeignKey('projects.id')),
   db.Column('tech_id', db.Integer, db.ForeignKey('techs.id')))
@@ -8,10 +9,12 @@ association_table = db.Table('project_techs', db.metadata,
 
 @dataclass
 class Tech(db.Model):
+  # Define the what I want from JSON using @dataclass
   id: int
   name: str
   icon: str
 
+  # SQLAlchemy definitions
   __tablename__ = 'techs'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), index=True, unique=True)
@@ -35,7 +38,6 @@ class Project(db.Model):
   url: str
   thumbnail: str
   techs: Tech
-
 
   __tablename__ = 'projects'
   id = db.Column(db.Integer, primary_key=True)

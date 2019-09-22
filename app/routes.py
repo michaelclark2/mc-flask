@@ -3,6 +3,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask import redirect, session, request, jsonify
 from werkzeug.security import check_password_hash
 
+"""Admin stuff"""
 class PrivateView(ModelView):
   def is_accessible(self):
     return session.get('authed')
@@ -18,10 +19,14 @@ def login_admin():
     session['pass_failed'] = True
   return redirect('/admin')
 
-
+"""App routes"""
 @app.route('/')
 def index():
-  return '<h1>hello world</h1>'
+  routes = []
+  for route in app.url_map.iter_rules():
+    if not 'admin' in route.rule and not 'static' in route.rule:
+      routes.append(route.rule)
+  return jsonify(sorted(routes))
 
 @app.route('/projects')
 def get_all_projects():
