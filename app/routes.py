@@ -1,4 +1,4 @@
-from app import app, admin, db, models, login
+from app import app, admin, db, models
 from flask_admin.contrib.sqla import ModelView
 from flask import redirect, session, request, jsonify
 

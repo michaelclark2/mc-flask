@@ -1,5 +1,4 @@
 from app import db
-from flask_login import UserMixin
 from dataclasses import dataclass
 
 association_table = db.Table('project_techs', db.metadata,
@@ -23,6 +22,9 @@ class Tech(db.Model):
 
   def __str__(self):
     return self.name
+
+  def __hash__(self):
+    return self.id
 
 @dataclass
 class Project(db.Model):
