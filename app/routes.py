@@ -1,4 +1,4 @@
-from app import app, admin, db, models
+from app import app, admin, db, models, github
 from flask_admin.contrib.sqla import ModelView
 from flask import redirect, session, request, jsonify
 from werkzeug.security import check_password_hash
@@ -42,3 +42,12 @@ def get_project_by_id(project_id):
 def get_all_techs():
   techs = models.Tech.query.all()
   return jsonify(techs)
+
+@app.route('/repos')
+def update_languages():
+  repos = github.get('/users/michaelclark2/repos')
+  languages = {}
+  for repo in repos:
+    r = github.get(repo['languages_url'])
+    languages.update(r)
+  return jsonify(languages)
