@@ -9,3 +9,7 @@ class Config(object):
 
   SECRET_KEY = os.environ.get('SECRET_KEY')
   ADMIN_PASSWORD = 'pbkdf2:sha256:150000$xqAx4226$f53be26c5350503a02863e81a925d439c899694db1692c59fe828c96f628cf3f'
+
+  GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
+  GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
+  GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
