@@ -26,3 +26,8 @@ def get_all_projects():
   projects = models.Project.query.all()
   return jsonify(projects)
 
+@app.route('/p/<int:project_id>')
+def get_project_by_id(project_id):
+  project = models.Project.query.get(project_id)
+  return jsonify(project)
+
