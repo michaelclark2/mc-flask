@@ -12,7 +12,10 @@ admin.add_view(PrivateView(models.Tech, db.session))
 
 @app.route('/admin/login', methods=['POST'])
 def login_admin():
-  session['authed'] = check_password_hash(app.config['ADMIN_PASSWORD'], request.form['password'])
+  if check_password_hash(app.config['ADMIN_PASSWORD'], request.form['password']):
+    session['authed'] = True
+  else:
+    session['pass_failed'] = True
   return redirect('/admin')
 
 

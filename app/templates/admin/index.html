@@ -1,8 +1,21 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
+  {% if not session['authed'] %}
   <form method="POST" action="login">
     <input type="password" name="password" value="{{
       request.form.password }}">
   </form>
+  {% if session['pass_failed'] %}
+  <div class="hero-unit">
+    <h1>ayelmao</h1>
+    <img src="https://i.imgur.com/vXxrlEl.jpg" alt="">
+  </div>
+  {%endif%}
+  {% else %}
+  <div class="hero-unit">
+    <img src="https://media.giphy.com/media/pyl1E9trnmwdW/giphy.gif" alt="">
+    <h1>You're logged in!</h1>
+  </div>
+  {% endif %}
 {% endblock %}
