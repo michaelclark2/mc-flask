@@ -1,6 +1,7 @@
 from app import app, admin, db, models
 from flask_admin.contrib.sqla import ModelView
 from flask import redirect, session, request, jsonify
+from werkzeug.security import check_password_hash
 
 class PrivateView(ModelView):
   def is_accessible(self):
@@ -11,7 +12,7 @@ admin.add_view(PrivateView(models.Tech, db.session))
 
 @app.route('/admin/login', methods=['POST'])
 def login_admin():
-  if request.form['password'] == app.config['ADMIN_PASSWORD']:
+  if check_password_hash(app.config['ADMIN_PASSWORD'], request.form['password']):
     session['authed'] = True
     return redirect('/admin')
   return 'ayelmao'

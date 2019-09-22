@@ -8,4 +8,4 @@ class Config(object):
   SQLALCHEMY_TRACK_MODIFICATION = False
 
   SECRET_KEY = os.environ.get('SECRET_KEY')
-  ADMIN_PASSWORD = 'password'
+  ADMIN_PASSWORD = 'pbkdf2:sha256:150000$xqAx4226$f53be26c5350503a02863e81a925d439c899694db1692c59fe828c96f628cf3f'
