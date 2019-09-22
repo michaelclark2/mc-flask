@@ -1,6 +1,6 @@
 from app import app, admin, db, models, login
 from flask_admin.contrib.sqla import ModelView
-from flask import redirect, session, request
+from flask import redirect, session, request, jsonify
 
 class PrivateView(ModelView):
   def is_accessible(self):
@@ -21,4 +21,8 @@ def login_admin():
 def index():
   return '<h1>hello world</h1>'
 
+@app.route('/projects')
+def get_all_projects():
+  projects = models.Project.query.all()
+  return jsonify(projects)
 
