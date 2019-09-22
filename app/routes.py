@@ -43,7 +43,7 @@ def get_all_techs():
   techs = models.Tech.query.all()
   return jsonify(techs)
 
-@app.route('/repos')
+@app.route('/code')
 def update_languages():
   repos = github.get('/users/michaelclark2/repos')
   languages = {}
