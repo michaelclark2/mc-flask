@@ -3,6 +3,10 @@ from flask_admin.contrib.sqla import ModelView
 from flask import redirect, session, request, jsonify
 from werkzeug.security import check_password_hash
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import json
+
 """Admin stuff"""
 class PrivateView(ModelView):
   def is_accessible(self):
@@ -51,3 +55,25 @@ def update_languages():
     r = github.get(repo['languages_url'])
     languages.update(r)
   return jsonify(languages)
+
+@app.route('/email', methods=['POST'])
+def send_email():
+  email = json.loads(request.data)
+
+  message = Mail(
+    from_email=email['email'],
+    to_emails='michael.clark1992@gmail.com',
+    subject=email['subject'],
+    html_content=email['message']
+  )
+
+  try:
+    sg = SendGridAPIClient(app.config['SENDGRID_API_KEY'])
+    response = sg.send(message)
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+  except Exception as e:
+    print(str(e))
+
+  return 'Success'

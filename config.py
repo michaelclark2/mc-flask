@@ -13,3 +13,4 @@ class Config(object):
   GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
   GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
   GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+  SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
