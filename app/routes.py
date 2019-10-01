@@ -54,7 +54,11 @@ def update_languages():
   for repo in repos:
     r = github.get(repo['languages_url'])
     languages.update(r)
-  return jsonify(languages)
+
+  lang_lines = []
+  for key in languages.keys():
+    lang_lines.append({key: languages[key]})
+  return jsonify(lang_lines)
 
 @app.route('/email', methods=['POST'])
 def send_email():
